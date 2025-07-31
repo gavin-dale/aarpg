@@ -7,6 +7,8 @@ var direction: Vector2 = Vector2.ZERO
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var state_machine: PlayerStateMachine = $StateMachine
 
+signal direction_changed(new_direction: Vector2)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	state_machine.init(self)
@@ -14,8 +16,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	direction.x = Input.get_action_strength("right") 	- Input.get_action_strength("left")
-	direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+	# direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
+	# direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+
+	direction = Vector2(
+		Input.get_axis('left', 'right'),  
+		Input.get_axis('up', 'down')
+		).normalized()
+
+	# forces magnitude to stay at 1 even when direction is (1,1) which can make player walk to fast
+	direction = direction.normalized()
 	pass
 	
 func _physics_process(delta: float) -> void:
@@ -37,6 +47,9 @@ func set_direction() -> bool:
 		return false
 		
 	cardinal_direction = new_direction
+
+	# player interactions host connects to this to rotation interaction areas
+	direction_changed.emit(new_direction)
 	
 	# scale sprite to -1 instead of flipping because flipping only effects the sprite itself,
 	# not anything around it
