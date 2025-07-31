@@ -23,7 +23,6 @@ position = Vector2(2, 9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-2, -8)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_5g5lq")
 debug_color = Color(0.728359, 0.481743, 0.152728, 0.419608)
 
