@@ -7,7 +7,7 @@ var attacking: bool = false
 
 @onready var walk: StateWalk = $"../Walk"
 @onready var idle: StateIdle = $"../Idle"
-@onready var hurtbox: Hurtbox = $"../../Interactions/Hurtbox"
+@onready var hurtbox: Hurtbox = %AttackHurtbox
 
 
 @onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
