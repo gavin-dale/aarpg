@@ -1,4 +1,4 @@
-class_name StateAttack extends State
+class_name StateAttack extends CharacterState
 
 var attacking: bool = false
 
@@ -14,10 +14,11 @@ var attacking: bool = false
 @onready var attack_animation_player: AnimationPlayer = $"../../Sprite2D/AttackEffectSprite/AnimationPlayer"
 @onready var audio: AudioStreamPlayer2D = $"../../Audio/AudioStreamPlayer2D"
 
+
 # what happens when the player enters this state
 func enter() -> void:
-	player.update_animation("attack")
-	attack_animation_player.play("attack_" + player.anim_direction())
+	character.update_animation("attack")
+	attack_animation_player.play("attack_" + character.anim_direction())
 	animation_player.animation_finished.connect(end_attack)
 	audio.stream = attack_sound
 	audio.pitch_scale = randf_range(0.9, 1.1)
@@ -40,12 +41,12 @@ func exit() -> void:
 	pass
 
 # what happens during the _process update in this State
-func process(_delta: float) -> State:
+func process(_delta: float) -> CharacterState:
 	# causes player to slow just a bit if you want while running
-	player.velocity -= player.velocity * decelerate_speed * _delta
+	character.velocity -= character.velocity * decelerate_speed * _delta
 
 	if attacking == false:
-		if player.direction == Vector2.ZERO:
+		if character.direction == Vector2.ZERO:
 			return idle
 		else: 
 			return walk
@@ -53,12 +54,12 @@ func process(_delta: float) -> State:
 	return null
 
 # what happens during the _physics_process update in this State
-func physics(_delta: float) -> State:
-	return null
+# func physics(_delta: float) -> State:
+# 	return null
 	
 # what happens with input events in this State
-func handle_input(_event: InputEvent) -> State:
-	return null
+# func handle_input(_event: InputEvent) -> State:
+# 	return null
 	
 func end_attack(_new_anim_name: String) -> void: 
 	attacking = false

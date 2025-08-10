@@ -1,4 +1,4 @@
-class_name StateWalk extends State
+class_name StateWalk extends CharacterState
 
 @export var move_speed: float = 100
 @onready var idle: StateIdle = $"../Idle"
@@ -6,7 +6,7 @@ class_name StateWalk extends State
 
 # what happens when the player enters this state
 func enter() -> void:
-	player.update_animation("walk")
+	character.update_animation("walk")
 	pass
 	
 # what happens when the player exits this state
@@ -14,23 +14,23 @@ func exit() -> void:
 	pass
 
 # what happens during the _process update in this State
-func process(_delta: float) -> State:
-	if player.direction == Vector2.ZERO:
+func process(_delta: float) -> CharacterState:
+	if character.direction == Vector2.ZERO:
 		return idle
 		
-	player.velocity = player.direction * move_speed
+	character.velocity = character.direction * move_speed
 	
-	if player.set_direction():
-		player.update_animation("walk")
+	if character.set_direction():
+		character.update_animation("walk")
 		
 	return null
 
 # what happens during the _physics_process update in this State
-func physics(_delta: float) -> State:
+func physics(_delta: float) -> CharacterState:
 	return null	
 	
 # what happens with input events in this State
-func handle_input(_event: InputEvent) -> State:
+func handle_input(_event: InputEvent) -> CharacterState:
 	if _event.is_action_pressed("attack"): 
 		return attack
 	return null

@@ -1,39 +1,39 @@
-class_name Player extends Character 
+class_name Enemy extends Character
 
-# var cardinal_direction: Vector2 = Vector2.DOWN
-# var direction: Vector2 = Vector2.ZERO
+# signal direction_changed(new_direction: Vector2)
+# signal enemy_damaged()
 
 # const DIRECTIONS = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 
+@export var hp: int = 3
+
+# var cardinal_direction: Vector2 = Vector2.DOWN
+# var direction: Vector2 = Vector2.ZERO
+# var player: Player
+# var invulnerable: bool = false
+
 # @onready var animation_player: AnimationPlayer = $AnimationPlayer
 # @onready var sprite_2d: Sprite2D = $Sprite2D
-# @onready var state_machine: CharacterStateMachine = $CharacterStateMachine
+# @onready var hitbox: Hitbox = $Hitbox
 
-# moving to base class
-# signal direction_changed(new_direction: Vector2)
+# can probably be refactored to into base state class
+# @onready var state_machine: EnemyStateMachine = $EnemyStateMachine
 
-# func _ready() -> void:
-# 	state_machine.init(self)
-# 	pass 
+func _ready() -> void:
+	pass 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta: float) -> void:
-	# direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	# direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
-
-	direction = Vector2(
-		Input.get_axis('left', 'right'),  
-		Input.get_axis('up', 'down')
-		).normalized()
-
-	# forces magnitude to stay at 1 even when direction is (1,1) which can make player walk to fast
-	direction = direction.normalized()
 	pass
-	
-# func _physics_process(delta: float) -> void:
+
+# for refactor - same as player
+# func _physics_process(_delta: float) -> void:
 # 	move_and_slide()
 
-func set_direction() -> bool:
+# for refactor - very similar to player
+# slightly different from player in that we provide new direction instead of getting it from input
+func set_direction(_new_direction) -> bool:
+	direction = _new_direction
 	if direction == Vector2.ZERO: 
 		return false
 
@@ -60,10 +60,12 @@ func set_direction() -> bool:
 	
 	return true
 
-# func update_animation(state: ) -> void:
+# for refactor - same as player
+# func update_animation(state: String) -> void:
 # 	animation_player.play(state + "_" + anim_direction())
-# 	pass
-	
+
+
+# for refactor - same as player
 # func anim_direction() -> String:
 # 	if cardinal_direction == Vector2.DOWN:
 # 		return "down"
