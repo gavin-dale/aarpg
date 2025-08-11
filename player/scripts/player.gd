@@ -12,9 +12,10 @@ class_name Player extends Character
 # moving to base class
 # signal direction_changed(new_direction: Vector2)
 
-# func _ready() -> void:
-# 	state_machine.init(self)
-# 	pass 
+func _ready() -> void:
+	init($CharacterStateMachine, $AnimationPlayer, $Sprite2D)
+	state_machine.init(self)
+	pass 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
