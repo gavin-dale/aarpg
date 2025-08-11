@@ -1,21 +1,18 @@
-class_name StateAttack extends CharacterState
+class_name AttackState extends CharacterState
 
 var attacking: bool = false
 
 @export var attack_sound: AudioStream
 @export_range(1, 20, 0.5) var decelerate_speed: float = 5
 
-@onready var walk: StateWalk = $"../Walk"
-@onready var idle: StateIdle = $"../Idle"
+@onready var walk: WalkState = %WalkState
+@onready var idle: IdleState = %IdleState
 @onready var hurtbox: Hurtbox = %AttackHurtbox
 
+@onready var animation_player: AnimationPlayer = %PlayerAnimationPlayer
+@onready var attack_animation_player: AnimationPlayer = %AttackAnimationPlayer
+@onready var audio: AudioStreamPlayer2D = %SwordSwooshAudioStreamPlayer
 
-@onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
-@onready var attack_animation_player: AnimationPlayer = $"../../Sprite2D/AttackEffectSprite/AnimationPlayer"
-@onready var audio: AudioStreamPlayer2D = $"../../Audio/AudioStreamPlayer2D"
-
-
-# what happens when the player enters this state
 func enter() -> void:
 	character.update_animation("attack")
 	attack_animation_player.play("attack_" + character.anim_direction())
@@ -24,7 +21,6 @@ func enter() -> void:
 	audio.pitch_scale = randf_range(0.9, 1.1)
 	audio.play()
 	attacking = true
-
 
 # small delay before enabling the hurtbox 
 	await get_tree().create_timer(0.075).timeout

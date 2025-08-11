@@ -1,10 +1,10 @@
 class_name CharacterState extends Node
 
 var character: Character
-var state_machine: CharacterStateMachine
+# var state_machine: CharacterStateMachine
 
-func init() -> void:
-    pass
+func init(character_ref: Character) -> void:
+    character = character_ref
 
 func enter() -> void: 
     pass

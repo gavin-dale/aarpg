@@ -1,7 +1,7 @@
-class_name StateIdle extends CharacterState
+class_name IdleState extends CharacterState
 
-@onready var walk: StateWalk = $"../Walk"
-@onready var attack: StateAttack = $"../Attack"
+@onready var walk: WalkState = %WalkState
+@onready var attack: AttackState = %AttackState
 
 # what happens when the player enters this state
 func enter() -> void:

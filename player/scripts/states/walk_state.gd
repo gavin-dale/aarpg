@@ -1,11 +1,12 @@
-class_name StateIdle extends CharacterState
+class_name WalkState extends CharacterState
 
-@onready var walk: StateWalk = $"../Walk"
-@onready var attack: StateAttack = $"../Attack"
+@export var move_speed: float = 100
+@onready var idle: IdleState = %IdleState
+@onready var attack: AttackState = %AttackState
 
 # what happens when the player enters this state
 func enter() -> void:
-	character.update_animation("idle")
+	character.update_animation("walk")
 	pass
 	
 # what happens when the player exits this state
@@ -14,19 +15,23 @@ func exit() -> void:
 
 # what happens during the _process update in this State
 func process(_delta: float) -> CharacterState:
-	if character.direction != Vector2.ZERO:
-		return walk
+	if character.direction == Vector2.ZERO:
+		return idle
+		
+	character.velocity = character.direction * move_speed
 	
-	# why is velocity set to zero? it's used by move_and_slide built-in physics processor
-	character.velocity = Vector2.ZERO
+	if character.set_direction():
+		character.update_animation("walk")
+		
 	return null
 
 # what happens during the _physics_process update in this State
 func physics(_delta: float) -> CharacterState:
-	return null
+	return null	
 	
 # what happens with input events in this State
 func handle_input(_event: InputEvent) -> CharacterState:
 	if _event.is_action_pressed("attack"): 
 		return attack
 	return null
+	

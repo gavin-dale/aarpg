@@ -13,7 +13,7 @@ class_name Player extends Character
 # signal direction_changed(new_direction: Vector2)
 
 func _ready() -> void:
-	init($CharacterStateMachine, $AnimationPlayer, $Sprite2D)
+	init(%PlayerCharacterStateMachine, %PlayerAnimationPlayer, $PlayerSprite2D)
 	state_machine.init(self)
 	pass 
 

@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	change_state(current_state.handle_input(event))
 
-func init(_character: Character) -> void:
+func init(character_ref: Character) -> void:
 	states = []
 
 	for child in get_children():
@@ -29,9 +29,9 @@ func init(_character: Character) -> void:
 
 	for state in states: 
 		print(state)
-		state.character = _character
-		state.state_machine = self
-		state.init()
+		# state.character = character_ref
+		# state.state_machine = self
+		state.init(character_ref)
 	
 	if states.size() > 0:
 		change_state(states[0])
