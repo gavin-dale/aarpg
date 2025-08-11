@@ -22,7 +22,7 @@ func process(_delta: float) -> CharacterState:
 	return null
 
 # what happens during the _physics_process update in this State
-func physics(_delta: float) -> CharacterState:
+func physics_process(_delta: float) -> CharacterState:
 	return null
 	
 # what happens with input events in this State

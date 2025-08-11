@@ -49,13 +49,5 @@ func process(_delta: float) -> CharacterState:
 
 	return null
 
-# what happens during the _physics_process update in this State
-# func physics(_delta: float) -> State:
-# 	return null
-	
-# what happens with input events in this State
-# func handle_input(_event: InputEvent) -> State:
-# 	return null
-	
 func end_attack(_new_anim_name: String) -> void: 
 	attacking = false

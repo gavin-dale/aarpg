@@ -20,13 +20,13 @@ func process(_delta: float) -> CharacterState:
 		
 	character.velocity = character.direction * move_speed
 	
-	if character.set_direction():
+	if character.set_direction(character.direction):
 		character.update_animation("walk")
 		
 	return null
 
 # what happens during the _physics_process update in this State
-func physics(_delta: float) -> CharacterState:
+func physics_process(_delta: float) -> CharacterState:
 	return null	
 	
 # what happens with input events in this State

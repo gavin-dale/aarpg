@@ -15,7 +15,7 @@ func exit() -> void:
 func process(_delta: float) -> CharacterState:
     return null
 
-func physics(_delta) -> CharacterState:
+func physics_process(_delta) -> CharacterState:
     return null
 
 # what happens with input events in this State
