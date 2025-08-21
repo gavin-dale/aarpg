@@ -3,6 +3,7 @@ class_name CharacterStateMachine extends Node
 var states: Array[ CharacterState ]
 var prev_state: CharacterState
 var current_state: CharacterState
+var previous_state: CharacterState
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED

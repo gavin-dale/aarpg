@@ -1,16 +1,15 @@
 class_name Hitbox extends Area2D
 
-signal damaged(damage: int)
+# signal damaged(damage: int)
+@export var damage: int = 1
 
 func _ready() -> void:
 	pass 
 
-
 func _process(delta: float) -> void:
 	pass
 
-func take_damage(damage: int) -> void:
-	print("TakeDamage: ", damage)
+# func take_damage(damage: int) -> void:
+# 	print("TakeDamage: ", damage)
 
-	# up to whatever entity uses this class to decide how damage is managed
-	damaged.emit(damage)
+# 	damaged.emit(damage)

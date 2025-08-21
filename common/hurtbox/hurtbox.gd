@@ -1,6 +1,6 @@
 class_name Hurtbox extends Area2D
 
-@export var damage: int = 1
+signal hit(damage: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,8 +14,11 @@ func _process(delta: float) -> void:
 
 # whenever hitbox enters hurtbox, call take damage on hitbox
 func area_entered_handler(area: Area2D) -> void:
-	if area is Hitbox: 
-		area.take_damage(damage)
+	# if owner != null and owner.has_method("damaged"): 
+	if area is Hitbox:
+		# should hitbox be responsible for implementing take damage?
+		# area.owner.take_damage(damage)
+		hit.emit(area.damage)
 	pass
 
 # 1. area_entered 

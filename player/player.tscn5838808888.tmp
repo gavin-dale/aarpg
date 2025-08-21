@@ -471,11 +471,6 @@ libraries = {
 autoplay = "no_attack"
 
 [node name="AttackHitbox" type="Area2D" parent="CharacterSprite2D"]
-unique_name_in_owner = true
-collision_layer = 512
-collision_mask = 0
-monitoring = false
-monitorable = false
 script = ExtResource("13_yllr7")
 metadata/_custom_type_script = "uid://djlmhe50h1mls"
 
@@ -526,9 +521,6 @@ script = ExtResource("10_2ieo8")
 
 [node name="CharacterHurtbox" type="Area2D" parent="."]
 unique_name_in_owner = true
-collision_layer = 2
-collision_mask = 0
-monitorable = false
 script = ExtResource("10_8t03j")
 metadata/_custom_type_script = "uid://bojhe24lnile"
 

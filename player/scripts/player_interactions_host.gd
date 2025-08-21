@@ -1,13 +1,13 @@
 class_name PlayerInteractionsHost extends Node2D
 
-@onready var player: Player = $".."
+@onready var player_character: PlayerCharacter = $".."
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player.direction_changed.connect(update_direction)
+	player_character.direction_changed.connect(update_direction)
 	pass # Replace with function body.
 
-# used to rotation interaction areas like hurtbox as player changes direction
+# used to rotation interaction areas like hurtbox as player_character changes direction
 func update_direction(new_direction: Vector2) -> void:
 	match new_direction:
 		Vector2.DOWN:

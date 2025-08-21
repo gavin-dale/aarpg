@@ -1,12 +1,14 @@
-class_name Player extends Character 
+class_name PlayerCharacter extends Character 
 
 func _ready() -> void:
-	init(%PlayerCharacterStateMachine, %PlayerAnimationPlayer, $PlayerSprite2D)
-	state_machine.init(self)
+	init(10)
+	# init(10, %CharacterStateMachine, %CharacterAnimationPlayer, %CharacterSprite2D, %CharacterHurtbox)
+
+	PlayerCharacterManager.player = self
 	pass 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	direction = Vector2(
 		Input.get_axis('left', 'right'),  
 		Input.get_axis('up', 'down')

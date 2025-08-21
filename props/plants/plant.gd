@@ -1,7 +1,7 @@
 class_name Plant extends Node2D
 
 func _ready() -> void:
-	$Hitbox.damaged.connect(take_damage)
+	%Hurtbox.hit.connect(take_damage)
 	pass # Replace with function body.
 
 func take_damage(_damange: int) -> void: 

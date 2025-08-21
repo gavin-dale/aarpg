@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://djlmhe50h1mls" path="res://common/hitbox/hitbox.gd" id="1_shx7r"]
 
 [node name="Hitbox" type="Area2D"]
-collision_layer = 256
+collision_layer = 0
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_shx7r")

@@ -1,33 +1,35 @@
 class_name Character extends CharacterBody2D
-# can prob do more in this class
-# hp, damanaged function
-# state machine init 
-# set direction
 
 signal direction_changed(new_direction: Vector2)
-signal damaged(damage:int)
+signal damaged()
 
+var hp: int
 var cardinal_direction: Vector2 = Vector2.DOWN
 var direction: Vector2 = Vector2.ZERO
 
 const DIRECTIONS = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 
-var state_machine: CharacterStateMachine
-var animation_player: AnimationPlayer
-var sprite_2d: Sprite2D
-var hitbox: Hitbox
+@onready var state_machine: CharacterStateMachine = %CharacterStateMachine
+@onready var animation_player: AnimationPlayer = %CharacterAnimationPlayer
+@onready var sprite_2d: Sprite2D = %CharacterSprite2D
+@onready var hurtbox: Hurtbox = %CharacterHurtBox
 
 func init(
-    state_machine_ref: CharacterStateMachine,
-    animation_player_ref: AnimationPlayer,
-    sprite_2d_ref: Sprite2D,
-    # hitbox_ref: Hitbox
+    _hp: int,
+    # _state_machine: CharacterStateMachine,
+    # _animation_player: AnimationPlayer,
+    # _sprite_2d: Sprite2D,
+    # _hurtbox: Hurtbox
 ) -> void:
-    state_machine = state_machine_ref
-    animation_player = animation_player_ref
-    sprite_2d = sprite_2d_ref
-    # hitbox = hitbox_ref
-    state_machine.init(self) # or wherever init belongs
+    hp = _hp
+    # state_machine = _state_machine
+    # animation_player = _animation_player
+    # sprite_2d = _sprite_2d
+    # hurtbox = _hurtbox
+    state_machine.init(self) 
+
+func _ready() -> void:
+    hurtbox.hit.connect(take_damage)
 
 func _physics_process(_delta: float) -> void:
     move_and_slide()
@@ -69,3 +71,8 @@ func anim_direction() -> String:
         return "up"
     else: 
         return "side"
+
+func take_damage(damage: int) -> void: 
+    print('damaged')
+    hp -= damage
+    damaged.emit() 
